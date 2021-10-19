@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="style.css">
+
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+   
+  </body>
+</html>
+
+<script type="text/javascript">
+  function DownloadFile(fileName) {
+      //Set the File URL.
+      var url = "Files/" + fileName;
+
+      //Create XMLHTTP Request.
+      var req = new XMLHttpRequest();
+      req.open("GET", url, true);
+      req.responseType = "blob";
+      req.onload = function () {
+          //Convert the Byte Data to BLOB object.
+          var blob = new Blob([req.response], { type: "application/octetstream" });
+
+          //Check the Browser type and download the File.
+          var isIE = false || !!document.documentMode;
+          if (isIE) {
+              window.navigator.msSaveBlob(blob, fileName);
+          } else {
+              var url = window.URL || window.webkitURL;
+              link = url.createObjectURL(blob);
+              var a = document.createElement("a");
+              a.setAttribute("download", fileName);
+              a.setAttribute("href", link);
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+          }
+      };
+      req.send();
+  };
+</script>
